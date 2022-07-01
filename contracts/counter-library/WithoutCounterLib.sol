@@ -1,0 +1,39 @@
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
+
+import "hardhat/console.sol";
+
+contract WithoutCounterLib {
+    struct Counter {
+        // This variable should never be directly accessed by users of the library: interactions must be restricted to
+        // the library's function. As of Solidity v0.5.2, this cannot be enforced, though there is a proposal to add
+        // this feature: see https://github.com/ethereum/solidity/issues/4637
+        uint256 _value; // default: 0
+    }
+
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+    }
+
+    function increment(Counter storage counter) internal {
+        unchecked {
+            counter._value += 1;
+        }
+    }
+
+    Counter private count;
+
+    function readCounter() public view returns (uint256) {
+        return current(count);
+    }
+
+    function countUp() public {
+        for (int256 i = 0; i < 10000; i++) {
+            increment(count);
+        }
+    }
+
+    function countOnce() public {
+        increment(count);
+    }
+}
