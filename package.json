@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "test:counter-library": "contracts/counter-library/*.test.js"
   },
   "author": "",
   "license": "ISC",
